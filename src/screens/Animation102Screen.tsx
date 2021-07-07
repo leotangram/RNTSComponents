@@ -1,10 +1,37 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, { useRef } from 'react'
+import { Animated, PanResponder, StyleSheet, View } from 'react-native'
 
 const Animation102Screen = () => {
+  const pan = useRef(new Animated.ValueXY()).current
+
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onPanResponderMove: Animated.event(
+      [
+        null,
+        {
+          dx: pan.x, // x,y are Animated.Value
+          dy: pan.y
+        }
+      ],
+      {
+        useNativeDriver: false
+      }
+    ),
+    onPanResponderRelease: () => {
+      Animated.spring(
+        pan, // Auto-multiplexed
+        { toValue: { x: 0, y: 0 }, useNativeDriver: false } // Back to zero
+      ).start()
+    }
+  })
+
   return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.purpleBox} />
+    <View style={styles.container}>
+      <Animated.View
+        style={[pan.getLayout(), styles.purpleBox]}
+        {...panResponder.panHandlers}
+      />
     </View>
   )
 }
@@ -12,8 +39,13 @@ const Animation102Screen = () => {
 export default Animation102Screen
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center'
+  },
   purpleBox: {
-    backgroundColor: 'orange',
+    backgroundColor: '#75cedb',
     height: 150,
     width: 150
   }
