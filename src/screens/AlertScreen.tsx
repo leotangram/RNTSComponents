@@ -22,10 +22,21 @@ const AlertScreen = () => {
       }
     )
 
+  const showPrompt = () =>
+    Alert.prompt(
+      'Are you sure?',
+      'This actions in not reversible',
+      (value: string) => console.log('info: ', value),
+      'plain-text',
+      'Hi!',
+      'number-pad'
+    )
+
   return (
     <View style={styles.globalMargin}>
       <HeaderTitle title="Alerts" />
       <Button onPress={showAlert} title="Show alert" />
+      <Button onPress={showPrompt} title="Show prompt" />
     </View>
   )
 }
