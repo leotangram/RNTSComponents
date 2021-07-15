@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Image, StyleSheet, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import HeaderTitle from '../components/HeaderTitle'
 
@@ -11,11 +11,18 @@ const InfiniteScrollScreen = () => {
     for (let index = 0; index < 5; index++) {
       newArray[index] = numbers.length + index
     }
-    setNumbers([...numbers, ...newArray])
+    setTimeout(() => {
+      setNumbers([...numbers, ...newArray])
+    }, 1500)
   }
 
   const renderItem = (item: number) => {
-    return <Text style={stylesInfiniteScroll.textItem}>{item}</Text>
+    return (
+      <Image
+        source={{ uri: `https://picsum.photos/id/${item}/500/400` }}
+        style={{ height: 400, width: '100%' }}
+      />
+    )
   }
 
   return (
@@ -24,6 +31,18 @@ const InfiniteScrollScreen = () => {
         data={numbers}
         keyExtractor={item => item.toString()}
         ListHeaderComponent={<HeaderTitle title="Infinite scroll" />}
+        ListFooterComponent={
+          <View
+            style={{
+              alignItems: 'center',
+              height: 150,
+              justifyContent: 'center',
+              width: '100%'
+            }}
+          >
+            <ActivityIndicator color="#5856d6" size={25} />
+          </View>
+        }
         onEndReached={loadMore}
         onEndReachedThreshold={0.5}
         renderItem={({ item }) => renderItem(item)}
