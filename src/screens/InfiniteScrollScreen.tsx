@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { ActivityIndicator, Image, StyleSheet, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import HeaderTitle from '../components/HeaderTitle'
+import FadeInImage from '../components/FadeInImage'
 
 const InfiniteScrollScreen = () => {
   const [numbers, setNumbers] = useState([0, 1, 2, 3, 4, 5])
@@ -18,10 +19,11 @@ const InfiniteScrollScreen = () => {
 
   const renderItem = (item: number) => {
     return (
-      <Image
-        source={{ uri: `https://picsum.photos/id/${item}/500/400` }}
-        style={{ height: 400, width: '100%' }}
-      />
+      <FadeInImage uri={`https://picsum.photos/id/${item}/500/400`} />
+      // <Image
+      //   source={{ uri: `https://picsum.photos/id/${item}/500/400` }}
+      //   style={{ height: 400, width: '100%' }}
+      // />
     )
   }
 
