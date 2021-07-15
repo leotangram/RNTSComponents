@@ -13,13 +13,32 @@ const ModalScreen = () => {
       <Modal animationType="fade" transparent visible={isVisible}>
         <View
           style={{
+            alignItems: 'center',
             backgroundColor: 'rgba(0, 0, 0, 0.3)',
-            flex: 1
+            flex: 1,
+            justifyContent: 'center'
           }}
         >
-          <View style={{ backgroundColor: '#ffffff' }}>
-            <HeaderTitle title="Modal" />
-            <Text>Cuerpo modal</Text>
+          <View
+            style={{
+              alignItems: 'center',
+              backgroundColor: '#ffffff',
+              borderRadius: 5,
+              elevation: 10,
+              height: 200,
+              justifyContent: 'center',
+              shadowOffset: {
+                height: 10,
+                width: 0
+              },
+              shadowOpacity: 0.25,
+              width: 200
+            }}
+          >
+            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Modal</Text>
+            <Text style={{ fontSize: 16, fontWeight: '300', marginBottom: 20 }}>
+              Cuerpo modal
+            </Text>
             <Button onPress={() => setIsVisible(false)} title="Cerrar" />
           </View>
         </View>
