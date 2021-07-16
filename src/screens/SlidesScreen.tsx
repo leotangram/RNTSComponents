@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Dimensions,
   Image,
@@ -8,9 +8,9 @@ import {
   Text,
   View
 } from 'react-native'
-import Carousel from 'react-native-snap-carousel'
+import Carousel, { Pagination } from 'react-native-snap-carousel'
 
-const { height: screenHeight, width: screenWidth } = Dimensions.get('window')
+const { width: screenWidth } = Dimensions.get('window')
 
 interface Slide {
   title: string
@@ -37,6 +37,8 @@ const items: Slide[] = [
 ]
 
 const SlidesScreen = () => {
+  const [activeIndex, setActiveIndex] = useState(0)
+
   const renderItem = (item: Slide) => {
     return (
       <View
@@ -64,8 +66,19 @@ const SlidesScreen = () => {
         data={items}
         itemWidth={screenWidth}
         layout="default"
+        onSnapToItem={index => setActiveIndex(index)}
         renderItem={({ item }) => renderItem(item)}
         sliderWidth={screenWidth}
+      />
+      <Pagination
+        activeDotIndex={activeIndex}
+        dotsLength={items.length}
+        dotStyle={{
+          backgroundColor: '#5856d6',
+          borderRadius: 10,
+          height: 10,
+          width: 10
+        }}
       />
     </SafeAreaView>
   )
