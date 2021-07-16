@@ -1,13 +1,85 @@
 import React from 'react'
-import { View } from 'react-native'
-import HeaderTitle from '../components/HeaderTitle'
+import {
+  Dimensions,
+  Image,
+  ImageSourcePropType,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native'
+import Carousel from 'react-native-snap-carousel'
+
+const { height: screenHeight, width: screenWidth } = Dimensions.get('window')
+
+interface Slide {
+  title: string
+  desc: string
+  img: ImageSourcePropType
+}
+
+const items: Slide[] = [
+  {
+    title: 'Titulo 1',
+    desc: 'Ea et eu enim fugiat sunt reprehenderit sunt aute quis tempor ipsum cupidatat et.',
+    img: require('../assets/slide-1.png')
+  },
+  {
+    title: 'Titulo 2',
+    desc: 'Anim est quis elit proident magna quis cupidatat culpa labore Lorem ea. Exercitation mollit velit in aliquip tempor occaecat dolor minim amet dolor enim cillum excepteur. ',
+    img: require('../assets/slide-2.png')
+  },
+  {
+    title: 'Titulo 3',
+    desc: 'Ex amet duis amet nulla. Aliquip ea Lorem ea culpa consequat proident. Nulla tempor esse ad tempor sit amet Lorem. Velit ea labore aute pariatur commodo duis veniam enim.',
+    img: require('../assets/slide-3.png')
+  }
+]
 
 const SlidesScreen = () => {
+  const renderItem = (item: Slide) => {
+    return (
+      <View
+        style={{
+          backgroundColor: '#ffffff',
+          borderRadius: 5,
+          flex: 1,
+          justifyContent: 'center',
+          padding: 40
+        }}
+      >
+        <Image
+          source={item.img}
+          style={{ height: 400, resizeMode: 'center', width: 350 }}
+        />
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.subTitle}>{item.desc}</Text>
+      </View>
+    )
+  }
+
   return (
-    <View>
-      <HeaderTitle title="Slides" />
-    </View>
+    <SafeAreaView style={{ flex: 1, paddingTop: 50 }}>
+      <Carousel
+        data={items}
+        itemWidth={screenWidth}
+        layout="default"
+        renderItem={({ item }) => renderItem(item)}
+        sliderWidth={screenWidth}
+      />
+    </SafeAreaView>
   )
 }
 
 export default SlidesScreen
+
+const styles = StyleSheet.create({
+  title: {
+    color: '#5856d6',
+    fontSize: 30,
+    fontWeight: 'bold'
+  },
+  subTitle: {
+    fontSize: 16
+  }
+})
