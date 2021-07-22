@@ -1,11 +1,12 @@
 import React, { FC } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useTheme } from '@react-navigation/native'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { MenuItem } from '../interfaces/interfaces'
 
 const FlatListMenuItem: FC<MenuItem> = ({ component, icon, name }) => {
   const { navigate } = useNavigation()
+  // const { colors } = useTheme()
 
   return (
     <TouchableOpacity
