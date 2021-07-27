@@ -7,11 +7,11 @@ export interface ThemeState extends Theme {
   dividerColor: string
 }
 
-const lightTheme: ThemeState = {
+export const lightTheme: ThemeState = {
   currentTheme: 'light',
   colors: {
     primary: 'red',
-    background: 'blue',
+    background: 'white',
     card: 'green',
     text: 'pink',
     border: 'orange',

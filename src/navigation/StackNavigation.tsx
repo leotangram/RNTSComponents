@@ -1,24 +1,27 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import HomeScreen from '../screens/HomeScreen'
+import { ThemeContext } from '../context/themeContext/ThemeContext'
+import AlertScreen from '../screens/AlertScreen'
 import Animation101Screen from '../screens/Animation101Screen'
 import Animation102Screen from '../screens/Animation102Screen'
-import SwitchScreen from '../screens/SwitchScreen'
-import AlertScreen from '../screens/AlertScreen'
-import TextInputScreen from '../screens/TextInputScreen'
+import ChangeThemeScreen from '../screens/ChangeThemeScreen'
+import HomeScreen from '../screens/HomeScreen'
+import InfiniteScrollScreen from '../screens/InfiniteScrollScreen'
+import ModalScreen from '../screens/ModalScreen'
 import PullToRefreshScreen from '../screens/PullToRefreshScreen'
 import SectionListScreen from '../screens/SectionListScreen'
-import ModalScreen from '../screens/ModalScreen'
-import InfiniteScrollScreen from '../screens/InfiniteScrollScreen'
 import SlidesScreen from '../screens/SlidesScreen'
-import ChangeThemeScreen from '../screens/ChangeThemeScreen'
+import SwitchScreen from '../screens/SwitchScreen'
+import TextInputScreen from '../screens/TextInputScreen'
 
 const Stack = createStackNavigator()
 
 const StackNavigation = () => {
+  const { theme } = useContext(ThemeContext)
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
