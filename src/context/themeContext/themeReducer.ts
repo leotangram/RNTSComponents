@@ -12,27 +12,27 @@ export const lightTheme: ThemeState = {
   colors: {
     primary: '#084f6a',
     background: 'white',
-    card: 'green',
-    text: 'black',
-    border: 'orange',
+    card: '#ffffff',
+    text: '#000000',
+    border: '#000000',
     notification: 'teal'
   },
   dark: false,
-  dividerColor: 'rgba(0, 0, 0, 0.7)'
+  dividerColor: 'rgba(0, 0, 0, 0.6)'
 }
 
 export const darkTheme: ThemeState = {
   currentTheme: 'dark',
   colors: {
     primary: '#75cecb',
-    background: 'black',
-    card: 'green',
-    text: 'pink',
-    border: 'orange',
+    background: '#000000',
+    card: '#000000',
+    text: '#ffffff',
+    border: '#000000',
     notification: 'teal'
   },
   dark: true,
-  dividerColor: 'rgba(0, 0, 0, 0.7)'
+  dividerColor: 'rgba(255, 255, 255, 0.6)'
 }
 
 export const themeReducer = (

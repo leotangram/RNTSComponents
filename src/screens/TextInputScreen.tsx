@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -14,6 +14,7 @@ import HeaderTitle from '../components/HeaderTitle'
 import { styles } from '../theme/appTheme'
 import { useForm } from '../hooks/useForm'
 import CustomSwitch from '../components/CustomSwitch'
+import { ThemeContext } from '../context/themeContext/ThemeContext'
 
 const TextInputScreen = () => {
   const { form, isSubscribed, onChange } = useForm({
@@ -22,6 +23,10 @@ const TextInputScreen = () => {
     name: '',
     phone: ''
   })
+
+  const {
+    theme: { colors, dividerColor }
+  } = useContext(ThemeContext)
 
   return (
     <KeyboardAvoidingView
@@ -36,7 +41,12 @@ const TextInputScreen = () => {
               autoCorrect={false}
               onChangeText={value => onChange(value, 'name')}
               placeholder="Add your name"
-              style={stylesTextInput.inputStyle}
+              placeholderTextColor={dividerColor}
+              style={{
+                ...stylesTextInput.inputStyle,
+                borderColor: colors.text,
+                color: colors.text
+              }}
             />
             <TextInput
               autoCapitalize="none"
@@ -45,7 +55,12 @@ const TextInputScreen = () => {
               keyboardType="email-address"
               onChangeText={value => onChange(value, 'email')}
               placeholder="Add your email"
-              style={stylesTextInput.inputStyle}
+              placeholderTextColor={dividerColor}
+              style={{
+                ...stylesTextInput.inputStyle,
+                borderColor: colors.text,
+                color: colors.text
+              }}
             />
             <Text>Suscribirme</Text>
             <View style={stylesTextInput.switchRow}>
@@ -61,7 +76,12 @@ const TextInputScreen = () => {
               keyboardType="phone-pad"
               onChangeText={value => onChange(value, 'phone')}
               placeholder="Add your phone"
-              style={stylesTextInput.inputStyle}
+              placeholderTextColor={dividerColor}
+              style={{
+                ...stylesTextInput.inputStyle,
+                borderColor: colors.text,
+                color: colors.text
+              }}
             />
             <View style={{ height: 100 }} />
           </View>
@@ -75,7 +95,6 @@ export default TextInputScreen
 
 const stylesTextInput = StyleSheet.create({
   inputStyle: {
-    borderColor: 'rgba(0, 0, 0, 0.3)',
     borderRadius: 10,
     borderWidth: 1,
     height: 50,

@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, useContext, useRef, useState } from 'react'
 import { StackScreenProps } from '@react-navigation/stack'
 import {
   Animated,
@@ -14,6 +14,7 @@ import {
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import Icon from 'react-native-vector-icons/Ionicons'
 import useAnimation from '../hooks/useAnimation'
+import { ThemeContext } from '../context/themeContext/ThemeContext'
 
 const { width: screenWidth } = Dimensions.get('window')
 
@@ -46,6 +47,9 @@ interface SlidesScreen extends StackScreenProps<any, any> {}
 const SlidesScreen: FC<SlidesScreen> = ({ navigation }) => {
   const { fadeIn, opacity } = useAnimation()
   const isVisible = useRef(false)
+  const {
+    theme: { colors }
+  } = useContext(ThemeContext)
 
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -53,7 +57,7 @@ const SlidesScreen: FC<SlidesScreen> = ({ navigation }) => {
     return (
       <View
         style={{
-          backgroundColor: '#ffffff',
+          backgroundColor: colors.background,
           borderRadius: 5,
           flex: 1,
           justifyContent: 'center',
@@ -64,8 +68,12 @@ const SlidesScreen: FC<SlidesScreen> = ({ navigation }) => {
           source={item.img}
           style={{ height: 400, resizeMode: 'center', width: 350 }}
         />
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.subTitle}>{item.desc}</Text>
+        <Text style={{ ...styles.title, color: colors.primary }}>
+          {item.title}
+        </Text>
+        <Text style={{ ...styles.subTitle, color: colors.text }}>
+          {item.desc}
+        </Text>
       </View>
     )
   }
@@ -98,7 +106,7 @@ const SlidesScreen: FC<SlidesScreen> = ({ navigation }) => {
           activeDotIndex={activeIndex}
           dotsLength={items.length}
           dotStyle={{
-            backgroundColor: '#5856d6',
+            backgroundColor: colors.primary,
             borderRadius: 10,
             height: 10,
             width: 10
@@ -114,7 +122,7 @@ const SlidesScreen: FC<SlidesScreen> = ({ navigation }) => {
             }}
             style={{
               alignItems: 'center',
-              backgroundColor: '#5856d6',
+              backgroundColor: colors.primary,
               borderRadius: 10,
               flexDirection: 'row',
               height: 50,
@@ -135,7 +143,6 @@ export default SlidesScreen
 
 const styles = StyleSheet.create({
   title: {
-    color: '#5856d6',
     fontSize: 30,
     fontWeight: 'bold'
   },

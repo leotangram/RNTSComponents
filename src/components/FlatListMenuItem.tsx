@@ -18,7 +18,7 @@ const FlatListMenuItem: FC<MenuItem> = ({ component, icon, name }) => {
       style={styles.container}
     >
       <Icon color={colors.primary} name={icon} size={23} />
-      <Text style={styles.itemText}>{name}</Text>
+      <Text style={{ ...styles.itemText, color: colors.text }}>{name}</Text>
       <View style={{ flex: 1 }} />
       <Icon color={colors.primary} name="chevron-forward-outline" size={23} />
     </TouchableOpacity>
